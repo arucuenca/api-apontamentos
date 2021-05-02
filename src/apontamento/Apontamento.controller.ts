@@ -19,12 +19,12 @@ export default class ApontamentoController {
   };
 
   private handleGet = (req: Request, res: Response) => {
-    return req.query.user ? this.getOne(req, res) : this.getAll(req, res);
+    return req.query.user ? this.getByUser(req, res) : this.getAll(req, res);
   };
 
-  private getOne = async (req: Request, res: Response) => {
+  private getByUser = async (req: Request, res: Response) => {
     await this.getRepository()
-      .findOne({ where: { user: req.query.user } })
+      .find({ where: { user: req.query.user } })
       .then((apontamento) => {
         res.json(apontamento);
       })
